@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Platform, StyleSheet, Text, View} from 'react-native'
+import {Platform, StyleSheet, Text, View, TouchableHighlightBase} from 'react-native'
 import Button from './src/components/Button'
 import Display from './src/components/Display'
 
@@ -36,7 +36,27 @@ export default class App extends Component {
 	}
 
 	setOperation = operation => {
+		if(this.state.current === 0) {
+			this.setState({ operation, current: 1, clearDisplay: true })
+		} else {
+			const equals = operation === '='
+			const values = [...this.state.values]
+			try {
+				values[0] = 
+					eval(`${values[0]} ${this.state.operation} ${values[1]}`)
+			} catch {
+				values[0] = this.state.values[0]
+			}
 
+			values[1] = 0
+			this.setState({
+				displayValue: values[0],
+				operation: equals ? null : operation,
+				current: equals ? 0 : 1,
+				clearDisplay: !equals,
+				values
+			})
+		}
 	}
 
 	render(){
