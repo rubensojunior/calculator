@@ -19,7 +19,7 @@ Calculator
 
 ## Features
 
-- all simples calculator functions.
+- All simples calculator functions.
 
 - ⚛️ **React Native** — A lib that provides a way to create native apps for Android and iOS
 
